@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>To-Do List</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  h1 {
+    text-align: center;
+  }
+  input[type="text"] {
+    width: calc(100% - 80px);
+    padding: 8px;
+    margin-bottom: 10px;
+  }
+  .task-list {
+    list-style-type: none;
+    padding: 0;
+  }
+  .task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #ccc;
+    padding: 8px;
+  }
+  .task input[type="checkbox"] {
+    margin-right: 10px;
+  }
+  .delete-btn {
+    background-color: #ff6666;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 3px;
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <h1>To-Do List</h1>
+  <input type="text" id="taskInput" placeholder="Enter task...">
+  <button onclick="addTask()">Add Task</button>
+  <ul class="task-list" id="taskList">
+    <!-- Tasks will be added here dynamically -->
+  </ul>
+</div>
+
+<script>
+  function addTask() {
+    var inputField = document.getElementById("taskInput");
+    var taskText = inputField.value.trim();
+    if (taskText !== "") {
+      var taskList = document.getElementById("taskList");
+      var li = document.createElement("li");
+      var checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.addEventListener("change", function() {
+        li.classList.toggle("completed");
+      });
+      var label = document.createElement("label");
+      label.textContent = taskText;
+      var deleteBtn = document.createElement("button");
+      deleteBtn.textContent = "Delete";
+      deleteBtn.className = "delete-btn";
+      deleteBtn.addEventListener("click", function() {
+        li.remove();
+      });
+      li.appendChild(checkbox);
+      li.appendChild(label);
+      li.appendChild(deleteBtn);
+      taskList.appendChild(li);
+      inputField.value = "";
+    }
+  }
+</script>
+
+</body>
+</html>
